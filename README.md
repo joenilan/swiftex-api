@@ -1,41 +1,31 @@
 # Swiftex User API v2
 API for Swiftex application.
 
-## Version: 2.3.44
+## Version: 2.1.21
+
 
 ### Security
-**Bearer**
+**Bearer**  
 
 |apiKey|*API Key*|
 |---|---|
 |Name|JWT|
 |In|header|
 
-### /api/v2/peatio/public/trading_fees
+### /api/v2/peatio/public/fees/trading
 
 #### GET
 ##### Description:
 
-Returns trading_fees table as paginated collection
-
-##### Parameters
-
-| Name | Located in | Description | Required | Schema |
-| ---- | ---------- | ----------- | -------- | ---- |
-| group | query | Member group for define maker/taker fee. | No | string |
-| market_id | query | Market id for define maker/taker fee. | No | string |
-| limit | query | Limit the number of returned paginations. Defaults to 100. | No | integer |
-| page | query | Specify the page of paginated results. | No | integer |
-| ordering | query | If set, returned values will be sorted in specific order, defaults to 'asc'. | No | string |
-| order_by | query | Name of the field, which result will be ordered by. | No | string |
+Returns trading fees
 
 ##### Responses
 
 | Code | Description | Schema |
 | ---- | ----------- | ------ |
-| 200 | Returns trading_fees table as paginated collection | [ [TradingFee](#tradingfee) ] |
+| 200 | Returns trading fees |
 
-### /api/v2/peatio/public/health/ready
+### /public/health/ready
 
 #### GET
 ##### Description:
@@ -48,7 +38,7 @@ Get application readiness status
 | ---- | ----------- |
 | 200 | Get application readiness status |
 
-### /api/v2/peatio/public/health/alive
+### /public/health/alive
 
 #### GET
 ##### Description:
@@ -61,7 +51,7 @@ Get application liveness status
 | ---- | ----------- |
 | 200 | Get application liveness status |
 
-### /api/v2/peatio/public/version
+### /public/version
 
 #### GET
 ##### Description:
@@ -74,7 +64,7 @@ Get running Swiftex version and build details.
 | ---- | ----------- |
 | 200 | Get running Swiftex version and build details. |
 
-### /api/v2/peatio/public/timestamp
+### /public/timestamp
 
 #### GET
 ##### Description:
@@ -87,7 +77,7 @@ Get server current time, in seconds since Unix epoch.
 | ---- | ----------- |
 | 200 | Get server current time, in seconds since Unix epoch. |
 
-### /api/v2/peatio/public/member-levels
+### /public/member-levels
 
 #### GET
 ##### Description:
@@ -100,7 +90,7 @@ Returns hash of minimum levels and the privileges they provide.
 | ---- | ----------- |
 | 200 | Returns hash of minimum levels and the privileges they provide. |
 
-### /api/v2/peatio/public/markets/{market}/tickers
+### /public/markets/{market}/tickers
 
 #### GET
 ##### Description:
@@ -111,28 +101,28 @@ Get ticker of specific market.
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ---- |
-| market | path | | Yes | string |
+| market | path |  | Yes | string |
 
 ##### Responses
 
-| Code | Description | Schema |
-| ---- | ----------- | ------ |
-| 200 | Get ticker of specific market. | [Ticker](#ticker) |
+| Code | Description |
+| ---- | ----------- |
+| 200 | Get ticker of specific market. |
 
-### /api/v2/peatio/public/markets/tickers
+### /public/markets/tickers
 
 #### GET
 ##### Description:
 
-Get ticker of all markets (For response doc see /:market/tickers/ response).
+Get ticker of all markets.
 
 ##### Responses
 
-| Code | Description | Schema |
-| ---- | ----------- | ------ |
-| 200 | Get ticker of all markets (For response doc see /:market/tickers/ response). | [Ticker](#ticker) |
+| Code | Description |
+| ---- | ----------- |
+| 200 | Get ticker of all markets. |
 
-### /api/v2/peatio/public/markets/{market}/k-line
+### /public/markets/{market}/k-line
 
 #### GET
 ##### Description:
@@ -143,7 +133,7 @@ Get OHLC(k line) of specific market.
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ---- |
-| market | path | | Yes | string |
+| market | path |  | Yes | string |
 | period | query | Time period of K line, default to 1. You can choose between 1, 5, 15, 30, 60, 120, 240, 360, 720, 1440, 4320, 10080 | No | integer |
 | time_from | query | An integer represents the seconds elapsed since Unix epoch. If set, only k-line data after that time will be returned. | No | integer |
 | time_to | query | An integer represents the seconds elapsed since Unix epoch. If set, only k-line data till that time will be returned. | No | integer |
@@ -155,7 +145,7 @@ Get OHLC(k line) of specific market.
 | ---- | ----------- |
 | 200 | Get OHLC(k line) of specific market. |
 
-### /api/v2/peatio/public/markets/{market}/depth
+### /public/markets/{market}/depth
 
 #### GET
 ##### Description:
@@ -166,7 +156,7 @@ Get depth or specified market. Both asks and bids are sorted from highest price 
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ---- |
-| market | path | | Yes | string |
+| market | path |  | Yes | string |
 | limit | query | Limit the number of returned price levels. Default to 300. | No | integer |
 
 ##### Responses
@@ -175,7 +165,7 @@ Get depth or specified market. Both asks and bids are sorted from highest price 
 | ---- | ----------- |
 | 200 | Get depth or specified market. Both asks and bids are sorted from highest price to lowest. |
 
-### /api/v2/peatio/public/markets/{market}/trades
+### /public/markets/{market}/trades
 
 #### GET
 ##### Description:
@@ -186,7 +176,7 @@ Get recent trades on market, each trade is included only once. Trades are sorted
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ---- |
-| market | path | | Yes | string |
+| market | path |  | Yes | string |
 | limit | query | Limit the number of returned trades. Default to 100. | No | integer |
 | page | query | Specify the page of paginated results. | No | integer |
 | timestamp | query | An integer represents the seconds elapsed since Unix epoch.If set, only trades executed before the time will be returned. | No | integer |
@@ -198,7 +188,7 @@ Get recent trades on market, each trade is included only once. Trades are sorted
 | ---- | ----------- | ------ |
 | 200 | Get recent trades on market, each trade is included only once. Trades are sorted in reverse creation order. | [ [Trade](#trade) ] |
 
-### /api/v2/peatio/public/markets/{market}/order-book
+### /public/markets/{market}/order-book
 
 #### GET
 ##### Description:
@@ -209,7 +199,7 @@ Get the order book of specified market.
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ---- |
-| market | path | | Yes | string |
+| market | path |  | Yes | string |
 | asks_limit | query | Limit the number of returned sell orders. Default to 20. | No | integer |
 | bids_limit | query | Limit the number of returned buy orders. Default to 20. | No | integer |
 
@@ -219,19 +209,12 @@ Get the order book of specified market.
 | ---- | ----------- | ------ |
 | 200 | Get the order book of specified market. | [ [OrderBook](#orderbook) ] |
 
-### /api/v2/peatio/public/markets
+### /public/markets
 
 #### GET
 ##### Description:
 
 Get all available markets.
-
-##### Parameters
-
-| Name | Located in | Description | Required | Schema |
-| ---- | ---------- | ----------- | -------- | ---- |
-| limit | query | Limit the number of returned paginations. Defaults to 100. | No | integer |
-| page | query | Specify the page of paginated results. | No | integer |
 
 ##### Responses
 
@@ -239,7 +222,7 @@ Get all available markets.
 | ---- | ----------- | ------ |
 | 200 | Get all available markets. | [ [Market](#market) ] |
 
-### /api/v2/peatio/public/currencies
+### /public/currencies
 
 #### GET
 ##### Description:
@@ -250,8 +233,6 @@ Get list of currencies
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ---- |
-| limit | query | Limit the number of returned paginations. Defaults to 100. | No | integer |
-| page | query | Specify the page of paginated results. | No | integer |
 | type | query | Currency type | No | string |
 
 ##### Responses
@@ -260,7 +241,7 @@ Get list of currencies
 | ---- | ----------- | ------ |
 | 200 | Get list of currencies | [ [Currency](#currency) ] |
 
-### /api/v2/peatio/public/currencies/{id}
+### /public/currencies/{id}
 
 #### GET
 ##### Description:
@@ -279,43 +260,112 @@ Get a currency
 | ---- | ----------- | ------ |
 | 200 | Get a currency | [Currency](#currency) |
 
-### /api/v2/peatio/account/transactions
+### /account/balances/{currency}
 
 #### GET
 ##### Description:
 
-Get your transactions history.
+Get user account by currency
+
+##### Parameters
+
+| Name | Located in | Description | Required | Schema |
+| ---- | ---------- | ----------- | -------- | ---- |
+| currency | path | The currency code. | Yes | string |
+
+##### Responses
+
+| Code | Description | Schema |
+| ---- | ----------- | ------ |
+| 200 | Get user account by currency | [Account](#account) |
+
+### /account/balances
+
+#### GET
+##### Description:
+
+Get list of user accounts
+
+##### Responses
+
+| Code | Description | Schema |
+| ---- | ----------- | ------ |
+| 200 | Get list of user accounts | [ [Account](#account) ] |
+
+### /account/deposit_address/{currency}
+
+#### GET
+##### Description:
+
+Returns deposit address for account you want to deposit to by currency. The address may be blank because address generation process is still in progress. If this case you should try again later.
+
+##### Parameters
+
+| Name | Located in | Description | Required | Schema |
+| ---- | ---------- | ----------- | -------- | ---- |
+| currency | path | The account you want to deposit to. | Yes | string |
+| address_format | query | Address format legacy/cash | No | string |
+
+##### Responses
+
+| Code | Description | Schema |
+| ---- | ----------- | ------ |
+| 200 | Returns deposit address for account you want to deposit to by currency. The address may be blank because address generation process is still in progress. If this case you should try again later. | [Deposit](#deposit) |
+
+### /account/deposits/{txid}
+
+#### GET
+##### Description:
+
+Get details of specific deposit.
+
+##### Parameters
+
+| Name | Located in | Description | Required | Schema |
+| ---- | ---------- | ----------- | -------- | ---- |
+| txid | path | Deposit transaction id | Yes | string |
+
+##### Responses
+
+| Code | Description | Schema |
+| ---- | ----------- | ------ |
+| 200 | Get details of specific deposit. | [Deposit](#deposit) |
+
+### /account/deposits
+
+#### GET
+##### Description:
+
+Get your deposits history.
 
 ##### Parameters
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ---- |
 | currency | query | Currency code | No | string |
-| order_by | query | Sorting order | No | string |
-| time_from | query | An integer represents the seconds elapsed since Unix epoch. | No | integer |
-| time_to | query | An integer represents the seconds elapsed since Unix epoch. | No | integer |
-| limit | query | Limit the number of returned transactions. Default to 100. | No | integer |
-| page | query | Specify the page of paginated results. | No | integer |
+| state | query |  | No | string |
+| limit | query | Number of deposits per page (defaults to 100, maximum is 100). | No | integer |
+| page | query | Page number (defaults to 1). | No | integer |
 
 ##### Responses
 
-| Code | Description |
-| ---- | ----------- |
-| 200 | Get your transactions history. |
+| Code | Description | Schema |
+| ---- | ----------- | ------ |
+| 200 | Get your deposits history. | [ [Deposit](#deposit) ] |
 
-### /api/v2/peatio/account/withdraws
+### /account/withdraws
 
 #### POST
 ##### Description:
 
-Creates new withdrawal to active beneficiary.
+Creates new crypto withdrawal.
 
 ##### Parameters
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ---- |
 | otp | formData | OTP to perform action | Yes | integer |
-| beneficiary_id | formData | ID of Active Beneficiary belonging to user. | Yes | integer |
+| rid | formData | Wallet address on the Blockchain. | Yes | string |
 | currency | formData | The currency code. | Yes | string |
 | amount | formData | The amount to withdraw. | Yes | double |
 | note | formData | Optional metadata to be applied to the transaction. Used to tag transactions with memorable comments. | No | string |
@@ -324,7 +374,7 @@ Creates new withdrawal to active beneficiary.
 
 | Code | Description |
 | ---- | ----------- |
-| 201 | Creates new withdrawal to active beneficiary. |
+| 201 | Creates new crypto withdrawal. |
 
 #### GET
 ##### Description:
@@ -345,203 +395,7 @@ List your withdraws as paginated collection.
 | ---- | ----------- | ------ |
 | 200 | List your withdraws as paginated collection. | [ [Withdraw](#withdraw) ] |
 
-### /api/v2/peatio/account/beneficiaries/{id}
-
-#### DELETE
-##### Description:
-
-Delete beneficiary
-
-##### Parameters
-
-| Name | Located in | Description | Required | Schema |
-| ---- | ---------- | ----------- | -------- | ---- |
-| id | path | Beneficiary Identifier in Database | Yes | integer |
-
-##### Responses
-
-| Code | Description |
-| ---- | ----------- |
-| 204 | Delete beneficiary |
-
-#### GET
-##### Description:
-
-Get beneficiary by ID
-
-##### Parameters
-
-| Name | Located in | Description | Required | Schema |
-| ---- | ---------- | ----------- | -------- | ---- |
-| id | path | Beneficiary Identifier in Database | Yes | integer |
-
-##### Responses
-
-| Code | Description | Schema |
-| ---- | ----------- | ------ |
-| 200 | Get beneficiary by ID | [Beneficiary](#beneficiary) |
-
-### /api/v2/peatio/account/beneficiaries/{id}/activate
-
-#### PATCH
-##### Description:
-
-Activates beneficiary with pin
-
-##### Parameters
-
-| Name | Located in | Description | Required | Schema |
-| ---- | ---------- | ----------- | -------- | ---- |
-| id | path | Beneficiary Identifier in Database | Yes | integer |
-| pin | formData | Pin code for beneficiary activation | Yes | integer |
-
-##### Responses
-
-| Code | Description | Schema |
-| ---- | ----------- | ------ |
-| 200 | Activates beneficiary with pin | [Beneficiary](#beneficiary) |
-
-### /api/v2/peatio/account/beneficiaries
-
-#### POST
-##### Description:
-
-Create new beneficiary
-
-##### Parameters
-
-| Name | Located in | Description | Required | Schema |
-| ---- | ---------- | ----------- | -------- | ---- |
-| currency | formData | Beneficiary currency code. | Yes | string |
-| name | formData | Human rememberable name which refer beneficiary. | Yes | string |
-| description | formData | Human rememberable name which refer beneficiary. | No | string |
-| data | formData | Beneficiary data in JSON format | Yes | json |
-
-##### Responses
-
-| Code | Description | Schema |
-| ---- | ----------- | ------ |
-| 201 | Create new beneficiary | [Beneficiary](#beneficiary) |
-
-#### GET
-##### Description:
-
-Get list of user beneficiaries
-
-##### Parameters
-
-| Name | Located in | Description | Required | Schema |
-| ---- | ---------- | ----------- | -------- | ---- |
-| currency | query | Beneficiary currency code. | No | string |
-| state | query | Defines either beneficiary active - user can use it to withdraw moneyor pending - requires beneficiary activation with pin. | No | string |
-
-##### Responses
-
-| Code | Description | Schema |
-| ---- | ----------- | ------ |
-| 200 | Get list of user beneficiaries | [ [Beneficiary](#beneficiary) ] |
-
-### /api/v2/peatio/account/deposit_address/{currency}
-
-#### GET
-##### Description:
-
-Returns deposit address for account you want to deposit to by currency. The address may be blank because address generation process is still in progress. If this case you should try again later.
-
-##### Parameters
-
-| Name | Located in | Description | Required | Schema |
-| ---- | ---------- | ----------- | -------- | ---- |
-| currency | path | The account you want to deposit to. | Yes | string |
-| address_format | query | Address format legacy/cash | No | string |
-
-##### Responses
-
-| Code | Description | Schema |
-| ---- | ----------- | ------ |
-| 200 | Returns deposit address for account you want to deposit to by currency. The address may be blank because address generation process is still in progress. If this case you should try again later. | [Deposit](#deposit) |
-
-### /api/v2/peatio/account/deposits/{txid}
-
-#### GET
-##### Description:
-
-Get details of specific deposit.
-
-##### Parameters
-
-| Name | Located in | Description | Required | Schema |
-| ---- | ---------- | ----------- | -------- | ---- |
-| txid | path | Deposit transaction id | Yes | string |
-
-##### Responses
-
-| Code | Description | Schema |
-| ---- | ----------- | ------ |
-| 200 | Get details of specific deposit. | [Deposit](#deposit) |
-
-### /api/v2/peatio/account/deposits
-
-#### GET
-##### Description:
-
-Get your deposits history.
-
-##### Parameters
-
-| Name | Located in | Description | Required | Schema |
-| ---- | ---------- | ----------- | -------- | ---- |
-| currency | query | Currency code | No | string |
-| state | query | | No | string |
-| limit | query | Number of deposits per page (defaults to 100, maximum is 100). | No | integer |
-| page | query | Page number (defaults to 1). | No | integer |
-
-##### Responses
-
-| Code | Description | Schema |
-| ---- | ----------- | ------ |
-| 200 | Get your deposits history. | [ [Deposit](#deposit) ] |
-
-### /api/v2/peatio/account/balances/{currency}
-
-#### GET
-##### Description:
-
-Get user account by currency
-
-##### Parameters
-
-| Name | Located in | Description | Required | Schema |
-| ---- | ---------- | ----------- | -------- | ---- |
-| currency | path | The currency code. | Yes | string |
-
-##### Responses
-
-| Code | Description | Schema |
-| ---- | ----------- | ------ |
-| 200 | Get user account by currency | [Account](#account) |
-
-### /api/v2/peatio/account/balances
-
-#### GET
-##### Description:
-
-Get list of user accounts
-
-##### Parameters
-
-| Name | Located in | Description | Required | Schema |
-| ---- | ---------- | ----------- | -------- | ---- |
-| limit | query | Limit the number of returned paginations. Defaults to 100. | No | integer |
-| page | query | Specify the page of paginated results. | No | integer |
-
-##### Responses
-
-| Code | Description | Schema |
-| ---- | ----------- | ------ |
-| 200 | Get list of user accounts | [ [Account](#account) ] |
-
-### /api/v2/peatio/market/trades
+### /market/trades
 
 #### GET
 ##### Description:
@@ -552,7 +406,7 @@ Get your executed trades. Trades are sorted in reverse creation order.
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ---- |
-| market | query | | No | string |
+| market | query |  | No | string |
 | limit | query | Limit the number of returned trades. Default to 100. | No | integer |
 | page | query | Specify the page of paginated results. | No | integer |
 | time_from | query | An integer represents the seconds elapsed since Unix epoch.If set, only trades executed after the time will be returned. | No | integer |
@@ -565,7 +419,7 @@ Get your executed trades. Trades are sorted in reverse creation order.
 | ---- | ----------- | ------ |
 | 200 | Get your executed trades. Trades are sorted in reverse creation order. | [ [Trade](#trade) ] |
 
-### /api/v2/peatio/market/orders/cancel
+### /market/orders/cancel
 
 #### POST
 ##### Description:
@@ -576,7 +430,7 @@ Cancel all my orders.
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ---- |
-| market | formData | | No | string |
+| market | formData |  | No | string |
 | side | formData | If present, only sell orders (asks) or buy orders (bids) will be canncelled. | No | string |
 
 ##### Responses
@@ -596,7 +450,7 @@ Cancel an order.
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ---- |
-| id | path | | Yes | integer |
+| id | path |  | Yes | integer |
 
 ##### Responses
 
@@ -604,7 +458,7 @@ Cancel an order.
 | ---- | ----------- |
 | 201 | Cancel an order. |
 
-### /api/v2/peatio/market/orders
+### /market/orders
 
 #### POST
 ##### Description:
@@ -615,11 +469,11 @@ Create a Sell/Buy order.
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ---- |
-| market | formData | | Yes | string |
-| side | formData | | Yes | string |
-| volume | formData | | Yes | double |
-| ord_type | formData | | No | string |
-| price | formData | | Yes | double |
+| market | formData |  | Yes | string |
+| side | formData |  | Yes | string |
+| volume | formData |  | Yes | double |
+| ord_type | formData |  | No | string |
+| price | formData |  | Yes | double |
 
 ##### Responses
 
@@ -630,13 +484,13 @@ Create a Sell/Buy order.
 #### GET
 ##### Description:
 
-Get your orders, result is paginated.
+Get your orders, results is paginated.
 
 ##### Parameters
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ---- |
-| market | query | | No | string |
+| market | query |  | No | string |
 | state | query | Filter order by state. | No | string |
 | limit | query | Limit the number of returned orders, default to 100. | No | integer |
 | page | query | Specify the page of paginated results. | No | integer |
@@ -648,9 +502,9 @@ Get your orders, result is paginated.
 
 | Code | Description | Schema |
 | ---- | ----------- | ------ |
-| 200 | Get your orders, result is paginated. | [ [Order](#order) ] |
+| 200 | Get your orders, results is paginated. | [ [Order](#order) ] |
 
-### /api/v2/peatio/market/orders/{id}
+### /market/orders/{id}
 
 #### GET
 ##### Description:
@@ -661,7 +515,7 @@ Get information of specified order.
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ---- |
-| id | path | | Yes | integer |
+| id | path |  | Yes | integer |
 
 ##### Responses
 
@@ -672,44 +526,6 @@ Get information of specified order.
 ### Models
 
 
-#### TradingFee
-
-Returns trading_fees table as paginated collection
-
-| Name | Type | Description | Required |
-| ---- | ---- | ----------- | -------- |
-| id | integer | Unique trading fee table identifier in database. | No |
-| group | string | Member group for define maker/taker fee. | No |
-| market_id | string | Market id for define maker/taker fee. | No |
-| maker | double | Market maker fee. | No |
-| taker | double | Market taker fee. | No |
-| created_at | string | Trading fee table created time in iso8601 format. | No |
-| updated_at | string | Trading fee table updated time in iso8601 format. | No |
-
-#### Ticker
-
-Get ticker of all markets (For response doc see /:market/tickers/ response).
-
-| Name | Type | Description | Required |
-| ---- | ---- | ----------- | -------- |
-| at | integer | Timestamp of ticker | No |
-| ticker | [TickerEntry](#tickerentry) | Ticker entry for specified time | No |
-
-#### TickerEntry
-
-| Name | Type | Description | Required |
-| ---- | ---- | ----------- | -------- |
-| buy | double | Best buy (highest) price in current orderbook (0.0 if there is no buy orders) | No |
-| sell | double | Best sell (lowest) price in current orderbook (0.0 if there is no sell orders) | No |
-| low | double | The lowest trade price during last 24 hours (0.0 if no trades executed during last 24 hours) | No |
-| high | double | The highest trade price during last 24 hours (0.0 if no trades executed during last 24 hours) | No |
-| open | double | Price of the first trade executed 24 hours ago or less | No |
-| last | double | The last executed trade price | No |
-| volume | double | Total amount of trades executed during last 24 hours (recalculated once in 15 minuets) | No |
-| vol | double | Alias to volume | No |
-| avg_price | double | Average price more precisely VWAP is calculated by adding up the total traded for every transaction(price multiplied by the number of shares traded) and then dividing by the total shares traded | No |
-| price_change_percent | string | Price change in the next format +3.19%.Price change is calculated using next formula (last - open) / open * 100% | No |
-
 #### Trade
 
 Get your executed trades. Trades are sorted in reverse creation order.
@@ -718,14 +534,11 @@ Get your executed trades. Trades are sorted in reverse creation order.
 | ---- | ---- | ----------- | -------- |
 | id | string | Trade ID. | No |
 | price | double | Trade price. | No |
-| amount | double | Trade amount. | No |
-| total | double | Trade total (Amount * Price). | No |
-| fee_currency | double | Currency user's fees were charged in. | No |
-| fee | double | Percentage of fee user was charged for performed trade. | No |
-| fee_amount | double | Amount of fee user was charged for performed trade. | No |
+| volume | double | Trade volume. | No |
+| funds | double | Trade funds. | No |
 | market | string | Trade market id. | No |
 | created_at | string | Trade create time in iso8601 format. | No |
-| taker_type | string | Trade taker order type (sell or buy). | No |
+| taker_type | string | Trade maker order type (sell or buy). | No |
 | side | string | Trade side. | No |
 | order_id | integer | Order id. | No |
 
@@ -740,7 +553,7 @@ Get the order book of specified market.
 
 #### Order
 
-Get your orders, result is paginated.
+Get your orders, results is paginated.
 
 | Name | Type | Description | Required |
 | ---- | ---- | ----------- | -------- |
@@ -767,14 +580,16 @@ Get all available markets.
 | ---- | ---- | ----------- | -------- |
 | id | string | Unique market id. It's always in the form of xxxyyy,where xxx is the base currency code, yyy is the quotecurrency code, e.g. 'btcusd'. All available markets canbe found at /api/v2/markets. | No |
 | name | string | Market name. | No |
-| base_unit | string | Market Base unit. | No |
-| quote_unit | string | Market Quote unit. | No |
-| min_price | double | Minimum order price. | No |
-| max_price | double | Maximum order price. | No |
-| min_amount | double | Minimum order amount. | No |
-| amount_precision | double | Precision for order amount. | No |
-| price_precision | double | Precision for order price. | No |
-| state | string | Market state defines if user can see/trade on current market. | No |
+| ask_unit | string | Market ask unit. | No |
+| bid_unit | string | Market bid unit. | No |
+| ask_fee | double | Market ask fee. | No |
+| bid_fee | double | Market bid fee. | No |
+| min_ask_price | double | Max ask order price. | No |
+| max_bid_price | double | Max bid order price. | No |
+| min_ask_amount | double | Min ask order amount. | No |
+| min_bid_amount | double | Min bid order amount. | No |
+| ask_precision | double | Precision for ask order. | No |
+| bid_precision | double | Precision for bid order. | No |
 
 #### Currency
 
@@ -788,8 +603,6 @@ Get a currency
 | explorer_transaction | string | Currency transaction exprorer url template | No |
 | explorer_address | string | Currency address exprorer url template | No |
 | type | string | Currency type | No |
-| deposit_enabled | string | Currency deposit possibility status (true/false). | No |
-| withdrawal_enabled | string | Currency withdrawal possibility status (true/false). | No |
 | deposit_fee | string | Currency deposit fee | No |
 | min_deposit_amount | string | Minimal deposit amount | No |
 | withdraw_fee | string | Currency withdraw fee | No |
@@ -798,9 +611,33 @@ Get a currency
 | withdraw_limit_72h | string | Currency 72h withdraw limit | No |
 | base_factor | string | Currency base factor | No |
 | precision | string | Currency precision | No |
-| position | string | Position used for defining currencies order | No |
 | icon_url | string | Currency icon | No |
-| min_confirmations | string | Number of confirmations required for confirming deposit or withdrawal | No |
+
+#### Account
+
+Get list of user accounts
+
+| Name | Type | Description | Required |
+| ---- | ---- | ----------- | -------- |
+| currency | string | Currency code. | No |
+| balance | double | Account balance. | No |
+| locked | double | Account locked funds. | No |
+
+#### Deposit
+
+Get your deposits history.
+
+| Name | Type | Description | Required |
+| ---- | ---- | ----------- | -------- |
+| id | integer | Unique deposit id. | No |
+| currency | string | Deposit currency id. | No |
+| amount | double | Deposit amount. | No |
+| fee | double | Deposit fee. | No |
+| txid | string | Deposit transaction id. | No |
+| confirmations | integer | Number of deposit confirmations. | No |
+| state | string | Deposit state. | No |
+| created_at | string | The datetime when deposit was created. | No |
+| completed_at | string | The datetime when deposit was completed.. | No |
 
 #### Withdraw
 
@@ -821,62 +658,6 @@ List your withdraws as paginated collection.
 | created_at | string | The datetimes for the withdrawal. | No |
 | updated_at | string | The datetimes for the withdrawal. | No |
 | done_at | string | The datetime when withdraw was completed | No |
-
-#### Beneficiary
-
-Get list of user beneficiaries
-
-| Name | Type | Description | Required |
-| ---- | ---- | ----------- | -------- |
-| id | integer | Beneficiary Identifier in Database | No |
-| currency | string | Beneficiary currency code. | No |
-| name | string | Human rememberable name which refer beneficiary. | No |
-| description | string | Human rememberable description of beneficiary. | No |
-| data | json | Bank Account details for fiat Beneficiary in JSON format.For crypto it's blockchain address. | No |
-| state | string | Defines either beneficiary active - user can use it to withdraw moneyor pending - requires beneficiary activation with pin. | No |
-
-#### Deposit
-
-Get your deposits history.
-
-| Name | Type | Description | Required |
-| ---- | ---- | ----------- | -------- |
-| id | integer | Unique deposit id. | No |
-| currency | string | Deposit currency id. | No |
-| amount | double | Deposit amount. | No |
-| fee | double | Deposit fee. | No |
-| txid | string | Deposit transaction id. | No |
-| confirmations | integer | Number of deposit confirmations. | No |
-| state | string | Deposit state. | No |
-| created_at | string | The datetime when deposit was created. | No |
-| completed_at | string | The datetime when deposit was completed.. | No |
-| tid | string | The shared transaction ID | No |
-
-#### Account
-
-Get list of user accounts
-
-| Name | Type | Description | Required |
-| ---- | ---- | ----------- | -------- |
-| currency | string | Currency code. | No
-
-| balance | double | Account balance. | No |
-| locked | double | Account locked funds. | No |
-
-#### Transactions
-
-| Name | Type | Description | Required |
-| ---- | ---- | ----------- | -------- |
-| address | string | Recipient address of transaction. | No |
-| currency | string | Transaction currency id. | No |
-| amount | double | Transaction amount. | No |
-| fee | double | Transaction fee. | No |
-| txid | string | Transaction id. | No |
-| state | string | Transaction state. | No |
-| note | string | Withdraw note. | No |
-| confirmations | integer | Number of confirmations. | No |
-| updated_at | string | Transaction updated time in iso8601 format. | No |
-| type | string | Type of transaction | No |
 
 #### Member
 
