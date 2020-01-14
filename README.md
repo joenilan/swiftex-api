@@ -25,6 +25,32 @@ Returns trading fees
 | ---- | ----------- | ------ |
 | 200 | Returns trading fees |
 
+### /api/v2/peatio/public/fees/withdraw
+
+#### GET
+##### Description:
+
+Returns withdraw fees
+
+##### Responses
+
+| Code | Description | Schema |
+| ---- | ----------- | ------ |
+| 200 | Returns withdraw fees |
+
+### /api/v2/peatio/public/fees/deposit
+
+#### GET
+##### Description:
+
+Returns deposit fees
+
+##### Responses
+
+| Code | Description | Schema |
+| ---- | ----------- | ------ |
+| 200 | Returns deposit fees |
+
 ### /public/health/ready
 
 #### GET
